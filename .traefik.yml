@@ -2,7 +2,7 @@ displayName: Traefik Deep Linking
 type: middleware
 iconPath: .assets/icon.png
 
-import: github.com/traefik/plugindemo
+import: github.com/milosdjurdjevic/traefik-deep-linking-middleware
 
 summary: '
   This plugin is a Traefik middleware that redirects mobile users to a specific URL.

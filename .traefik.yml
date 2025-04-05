@@ -10,10 +10,9 @@ summary: '
   Otherwise, it allows the request to continue to the original destination.'
 
 testData:
-  plugin:
-    mobile-redirect:
-      redirects:
-        /validate-email: "app://validate-email"
-        /change-email: "app://change-email"
-        /forgot-password: "app://forgot-password"
-        /change-email: "app://change-email"
+  mobile-redirect:
+    redirects:
+      /validate-email: "app://validate-email"
+      /change-email: "app://change-email"
+      /forgot-password: "app://forgot-password"
+      /change-email: "app://change-email"

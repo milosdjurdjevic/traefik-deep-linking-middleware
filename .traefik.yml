@@ -1,6 +1,5 @@
 displayName: Traefik Deep Linking
 type: middleware
-iconPath: .assets/icon.png
 
 import: github.com/milosdjurdjevic/traefik-deep-linking-middleware
 

@@ -25,14 +25,14 @@ func CreateConfig() *Config {
 	}
 }
 
-// MobileRedirect handles deep linking redirects for mobile devices
-type MobileRedirect struct {
+// DeepLinking handles deep linking redirects for mobile devices
+type DeepLinking struct {
 	next         http.Handler
 	redirects    map[string]string
 	mobileRegexp *regexp.Regexp
 }
 
-// New creates a new MobileRedirect middleware instance
+// New creates a new DeepLinking middleware instance
 func New(ctx context.Context, next http.Handler, config *Config, name string) (http.Handler, error) {
 	if next == nil {
 		return nil, ErrNilNextHandler
@@ -43,7 +43,7 @@ func New(ctx context.Context, next http.Handler, config *Config, name string) (h
 
 	mobileRE := regexp.MustCompile(`(?i)(android|blackberry|iphone|ipad|ipod|iemobile|opera mobile|webos)`)
 
-	return &MobileRedirect{
+	return &DeepLinking{
 		next:         next,
 		redirects:    normalizeRedirects(config.Redirects),
 		mobileRegexp: mobileRE,
@@ -71,16 +71,16 @@ func normalizeRedirects(redirects map[string]string) map[string]string {
 }
 
 // ServeHTTP implements the http.Handler interface
-func (m *MobileRedirect) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
+func (d *DeepLinking) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	path := strings.TrimSuffix(req.URL.Path, "/")
 	ua := req.Header.Get("User-Agent")
 
-	if ua != "" && m.mobileRegexp.MatchString(ua) {
-		if redirectURL, exists := m.redirects[path]; exists && redirectURL != "" {
+	if ua != "" && d.mobileRegexp.MatchString(ua) {
+		if redirectURL, exists := d.redirects[path]; exists && redirectURL != "" {
 			http.Redirect(rw, req, redirectURL, http.StatusFound)
 			return
 		}
 	}
 
-	m.next.ServeHTTP(rw, req)
+	d.next.ServeHTTP(rw, req)
 }

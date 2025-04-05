@@ -44,7 +44,7 @@ func TestNew(t *testing.T) {
 	}
 }
 
-func TestMobileRedirect_ServeHTTP(t *testing.T) {
+func TestDeepLinkingRedirect_ServeHTTP(t *testing.T) {
 	config := CreateConfig()
 	nextHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("next handler"))

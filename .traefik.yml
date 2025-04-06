@@ -14,4 +14,3 @@ testData:
       /validate-email: "app://validate-email"
       /change-email: "app://change-email"
       /forgot-password: "app://forgot-password"
-      /change-email: "app://change-email"

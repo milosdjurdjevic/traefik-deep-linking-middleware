@@ -1,4 +1,4 @@
-package deep_linking
+package traefik_deep_linking_middleware
 
 import (
 	"context"

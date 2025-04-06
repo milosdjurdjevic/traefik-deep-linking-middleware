@@ -3,10 +3,7 @@ type: middleware
 
 import: github.com/milosdjurdjevic/traefik-deep-linking-middleware
 
-summary: '
-  This plugin is a Traefik middleware that redirects mobile users to a specific URL.
-  It checks the user agent and if it matches a mobile device, it redirects to the specified URL.
-  Otherwise, it allows the request to continue to the original destination.'
+summary: '[DeepLinking] Traefik Middleware for Deep Linking'
 
 testData:
   mobile-redirect:

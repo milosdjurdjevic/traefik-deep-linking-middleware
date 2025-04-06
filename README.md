@@ -19,14 +19,6 @@ The plugin requires configuration for the redirects. The configuration is define
 
 Once the plugin is installed and configured, it will automatically redirect mobile users based on their user agent and the requested path.
 
-## Testing
-
-Unit tests for the plugin are located in `deep_linking_test.go`. You can run the tests using:
-
-```
-make test
-```
-
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.

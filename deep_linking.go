@@ -18,7 +18,6 @@ func CreateConfig() *Config {
 	return &Config{
 		Redirects: map[string]string{
 			"/validate-mail":   "app://validate-mail",
-			"/change-initiate": "app://change-initiate",
 			"/forgot-password": "app://forgot-password",
 			"/change-email":    "app://change-email",
 		},
@@ -76,7 +75,12 @@ func (d *DeepLinking) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	ua := req.Header.Get("User-Agent")
 
 	if ua != "" && d.mobileRegexp.MatchString(ua) {
-		if redirectURL, exists := d.redirects[path]; exists && redirectURL != "" {
+		if baseRedirectURL, exists := d.redirects[path]; exists && baseRedirectURL != "" {
+			// Preserve original query string
+			redirectURL := baseRedirectURL
+			if req.URL.RawQuery != "" {
+				redirectURL += "?" + req.URL.RawQuery
+			}
 			http.Redirect(rw, req, redirectURL, http.StatusFound)
 			return
 		}
